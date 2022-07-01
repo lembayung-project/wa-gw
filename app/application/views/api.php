@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAMEITDEVELOPER :: <?= $title ?></title>
+    <title>LEMBAYUNG :: <?= $title ?></title>
     <link rel="icon" href="<?= _assets('images/favicon.png') ?>">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -79,12 +79,16 @@
                                         <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p-tombol" type="button" role="tab" aria-controls="" aria-selected="false">Message Button</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#p-url" type="button" role="tab" aria-controls="" aria-selected="false">Message Link</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#webhooksss" type="button" role="tab" aria-controls="" aria-selected="false">Webhook</button>
                                     </li>
                                 </ul>
 
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="p-text" role="tabpanel" aria-labelledby="pills-home-tab">
+                                        <h4>Query String</h4>
                                         <table class="table table-striped">
                                             <tr>
                                                 <td>
@@ -112,45 +116,15 @@
                                             </tr>
                                         </table>
                                         <br>
-                                        <h4>GET</h4>
+                                        <h4>POST</h4>
                                         <div class="example-container">
                                             <div class="example-code">
                                                 <pre><code class="html"><?= base_url('api/send-message') ?>?<span class="text-warning">apikey</span>=<?= $user->api_key ?>&<span class="text-warning">sender</span>=628xxxx&<span class="text-warning">receiver</span>=628xxxx&<span class="text-warning">message</span>=test</code></pre>
                                             </div>
                                         </div>
-                                        <br>
-                                        <h4>POST</h4>
-                                        <div class="example-container">
-                                            <div class="example-code">
-                                                <pre><code class="php">$data = [
-    'api_key' => '<?= $user->api_key ?>',
-    'sender'  => 'Sender number (make sure its scanned)',
-    'number'  => 'Number of destination to send message',
-    'message' => 'the message'
-];
-
-$curl = curl_init();
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "<?= base_url('api/send-message') ?>",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => json_encode($data))
-);
-
-$response = curl_exec($curl);
-
-curl_close($curl);
-echo $response;
-                                                </code></pre>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="tab-pane fade" id="p-media" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                        <h4>Query String</h4>
                                         <table class="table table-striped">
                                             <tr>
                                                 <td>
@@ -184,47 +158,16 @@ echo $response;
                                             </tr>
                                         </table>
                                         <br>
-                                        <h4>GET</h4>
+                                        <h4>POST</h4>
                                         <div class="example-container">
                                             <div class="example-code">
                                                 <pre><code class="html"><?= base_url('api/send-media') ?>?<span class="text-warning">apikey</span>=<?= $user->api_key ?>&<span class="text-warning">sender</span>=628xxxx&<span class="text-warning">receiver</span>=628xxxx&<span class="text-warning">message</span>=test&url=https://i.ibb.co/HNdL38S/Untitled-1.png</code></pre>
                                             </div>
                                         </div>
                                         <br>
-                                        <h4>POST</h4>
-                                        <div class="example-container">
-                                            <div class="example-code">
-                                                <pre><code class="php">$data = [
-    'api_key' => '<?= $user->api_key ?>',
-    'sender'  => 'sender number (make sure its scanned)',
-    'number'  => 'Number of destination to send message',
-    'message' => 'caption (fill in if you send a picture)',
-    
-    'url' => 'Link image/pdf'
-];
-
-$curl = curl_init();
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "<?= base_url('api/send-media') ?>",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => json_encode($data))
-);
-
-$response = curl_exec($curl);
-
-curl_close($curl);
-echo $response;
-                                                </code></pre>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="tab-pane fade" id="p-tombol" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                        <h4>Query String</h4>
                                         <table class="table table-striped">
                                             <tr>
                                                 <td>
@@ -270,47 +213,62 @@ echo $response;
                                             </tr>
                                         </table>
                                         <br>
-                                        <h4>GET</h4>
+                                        <h4>POST</h4>
                                         <div class="example-container">
                                             <div class="example-code">
                                                 <pre><code class="html"><?= base_url('api/send-button') ?>?<span class="text-warning">apikey</span>=<?= $user->api_key ?>&<span class="text-warning">sender</span>=628xxxx&<span class="text-warning">receiver</span>=628xxxx&<span class="text-warning">message</span>=test&<span class="text-warning">footer</span>=footer&<span class="text-warning">btn1</span>=button1&<span class="text-warning">btn2</span>=button2</code></pre>
                                             </div>
                                         </div>
                                         <br>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="p-url" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                        <h4>Query String</h4>
+                                        <table class="table table-striped">
+                                            <tr>
+                                                <td>
+                                                    <span class="text-warning">apikey</span>
+                                                </td>
+                                                <td>Your api key</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="text-warning">sender</span>
+                                                </td>
+                                                <td>sender number (must have scanned qr)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="text-warning">receiver</span>
+                                                </td>
+                                                <td>message recipient</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="text-warning">message</span>
+                                                </td>
+                                                <td>message content</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="text-warning">btn1</span>
+                                                </td>
+                                                <td>button1 (button name)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span class="text-warning">btnid1</span>
+                                                </td>
+                                                <td>btnid1 (button url)</td>
+                                            </tr>
+                                        </table>
+                                        <br>
                                         <h4>POST</h4>
                                         <div class="example-container">
                                             <div class="example-code">
-                                                <pre><code class="php">$data = [
-    'api_key' => '<?= $user->api_key ?>',
-    'sender'  => 'sender number (make sure its scanned)',
-    'number'  => 'Number of destination to send message',
-    'message' => 'message',
-    'footer' => 'message below the button',
-    'button1' => 'first button name',
-    'button2' => 'second button name',
-];
-
-$curl = curl_init();
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "<?= base_url('api/send-button') ?>",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => json_encode($data))
-);
-
-$response = curl_exec($curl);
-
-curl_close($curl);
-echo $response;
-                                                </code></pre>
+                                                <pre><code class="html"><?= base_url('api/send-url') ?>?<span class="text-warning">apikey</span>=<?= $user->api_key ?>&<span class="text-warning">sender</span>=628xxxx&<span class="text-warning">receiver</span>=628xxxx&<span class="text-warning">message</span>=test&<span class="text-warning">btn1</span>=button1&<span class="text-warning">btnid1</span>=https://google.com</code></pre>
                                             </div>
                                         </div>
-                                    </div>
                                     <div class="tab-pane fade" id="webhooksss" role="tabpanel" aria-labelledby="pills-contact-tab">
                                         <br>
                                         <div class="example-container">

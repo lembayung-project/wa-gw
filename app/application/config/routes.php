@@ -87,6 +87,7 @@ $route['report/api/del'] = 'reports/api_del';
 $route['api/send-message'] = 'api/send_message';
 $route['api/send-media'] = 'api/send_media';
 $route['api/send-button'] = 'api/send_button';
+$route['api/send-url'] = 'api/send_url';
 $route['api/callback'] = 'api/callback';
 
 $route['excel/export'] = 'excel/export_number';

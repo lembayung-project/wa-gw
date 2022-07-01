@@ -21,33 +21,7 @@ const ser = app.listen(port, host, () => {
     console.log(`Server is listening on http://${host}:${port}`)
 })
 const io = socket(ser);
-const Sentry = require("@sentry/node");
-const Tracing = require("@sentry/tracing");
 
-
-Sentry.init({
-  dsn: "https://7848387b81674560a96fcdfdc7962b29@o1283772.ingest.sentry.io/6493736",
-
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  tracesSampleRate: 1.0,
-});
-
-const transaction = Sentry.startTransaction({
-  op: "test",
-  name: "My First Test Transaction",
-});
-
-setTimeout(() => {
-  try {
-    foo();
-  } catch (e) {
-    Sentry.captureException(e);
-  } finally {
-    transaction.finish();
-  }
-}, 99);
 // const db = mysql.createConnection({
 //     host: process.env.DB_HOSTNAME,
 //     user: process.env.DB_USERNAME,

@@ -1,11 +1,11 @@
 <div class="app-sidebar">
     <div class="logo">
-        <a href="#" class="logo-icon" style="background: url(<?= _assets('images/sameitdeveloper.png') ?>) no-repeat; background-position: center center;background-size: 35px;"><span class="logo-text">SAMEITDEVELOPER</span></a>
+        <a href="#" class="logo-icon" style="background: url('https://www.tanjunglesung.com/wp-content/uploads/2018/12/logo-wa-whatsapp.png') no-repeat; background-position: center center;background-size: 35px;"><span class="logo-text">WAGATEWAY</span></a>
         <div class="sidebar-user-switcher user-activity-online">
             <a href="#">
-                <img src="<?= _assets() ?>/images/avatars/avatar.gif">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png">
                 <span class="activity-indicator"></span>
-                <span class="user-info-text"><?= $user->username ?><br><span class="user-state-info">SAMEITDEVELOPER</span></span>
+                <span class="user-info-text"><?= $user->username ?><br><span class="user-state-info">LEMBAYUNG</span></span>
             </a>
         </div>
     </div>
@@ -24,7 +24,7 @@
                 <a href="<?= base_url('autoresponder') ?>" class="active"><i class="material-icons-two-tone">message</i>Auto Reply</a>
             </li>
             <li>
-                <a href="<?= base_url('contacts') ?>" class="active"><i class="material-icons-two-tone">contacts</i>Contacat | Number</a>
+                <a href="<?= base_url('contacts') ?>" class="active"><i class="material-icons-two-tone">contacts</i>Contact Number</a>
             </li>
             <li>
                 <a href="<?= base_url('blast') ?>" class="active"><i class="material-icons-two-tone">question_answer</i>WA Blast</a>
@@ -53,7 +53,7 @@
                 Other
             </li>
             <li>
-                <a href="<?= base_url('api') ?>" class="active"><i class="material-icons-two-tone">api</i>Rest Api</a>
+                <a href="<?= base_url('api') ?>" class="active"><i class="material-icons-two-tone">api</i>Rest Api Doc</a>
             </li>
             <?php if ($user->level == 1) { ?>
                 <li>

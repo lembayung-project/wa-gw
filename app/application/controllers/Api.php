@@ -260,6 +260,86 @@ class Api extends CI_Controller
         }
     }
 
+    public function send_url()
+    {
+        if ($this->input->post()) { 
+            $data = json_decode(file_get_contents('php://input'), true);
+            $sender = $data['sender'];
+            $nomor = $data['number'];
+            $pesan = $data['message'];
+            $button1 = $data['btn1'];
+            $button1_url = $data['btnid1'];
+            $key = $data['api_key'];
+            header('Content-Type: application/json');
+        } else {
+            $sender = $this->input->get('sender');
+            $nomor = $this->input->get('receiver');
+            $pesan = $this->input->get('message');
+            $button1 = $this->input->get('btn1');
+            $button1_url = $this->input->get('btnid1');
+            $key = $this->input->get('apikey');
+            header('Content-Type: application/json');
+        }
+
+
+        if (!isset($nomor) && !isset($pesan) && !isset($sender) && !isset($key) && !isset($button1) && !isset($button1_url)) {
+            $ret['status'] = false;
+            $ret['msg'] = "Incorrect parameters!";
+            echo json_encode($ret, true);
+            exit;
+        }
+
+        $cek = $this->db->get_where('account', ['api_key' => $key]);
+        if ($cek->num_rows() == 0) {
+            $ret['status'] = false;
+            $ret['msg'] = "Api Key is wrong/not found!";
+            echo json_encode($ret, true);
+            exit;
+        }
+        $id_users = $cek->row()->id;
+        $cek2 = $this->db->get_where('device', ['nomor' => $sender, 'pemilik' => $id_users]);
+        if ($cek2->num_rows() == 0) {
+            $ret['status'] = false;
+            $ret['msg'] = "Device not found!";
+            echo json_encode($ret, true);
+            exit;
+        }
+        $res = sendURL($nomor, $sender, $pesan, $button1, $button1_url);
+        if ($res['status'] == "true") {
+            $datainsert = [
+                'device' => $sender,
+                'receiver' => $nomor,
+                'message' => $pesan,
+                'btn1' => $button1,
+                'btnid1' => $button1_url,
+                'type' => 'api',
+                'status' => 'Sent',
+                'created_at' => date('Y-m-d H:i:s')
+            ];
+            $this->db->insert('reports', $datainsert);
+            $ret['status'] = true;
+            $ret['msg'] = "Message sent successfully";
+            echo json_encode($ret, true);
+            exit;
+        } else {
+	    $datainsert = [
+	       'device' => $sender,
+	       'receiver' => $nomor,
+	       'message' => $pesan,
+	       'btn1' => $button1,
+	       'btnid1' => $button1_url,
+	       'type' => 'api',
+	       'status' => 'Failed',
+	       'created_at' => date('Y-m-d H:i:s')
+	    ];
+	    $this->db->insert('reports', $datainsert);
+	    $ret['status'] = false;
+	    $ret['msg'] = "Kesalahan";
+            echo json_encode($ret, true);
+            exit;
+        }
+    }
+
     public function callback()
     {
         header('content-type: application/json');

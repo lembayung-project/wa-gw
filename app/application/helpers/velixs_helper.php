@@ -250,6 +250,31 @@ function sendBTN($number, $sender, $msg, $footer, $btn1, $btn2)
     return json_decode($result, true);
 }
 
+function sendURL($number, $sender, $msg, $btn1, $btn1_url)
+{
+    $url = base_node() . "/send-url";
+    $data = [
+        "sender" => $sender,
+        "number" => $number,
+        "message" => $msg,
+        "btn1" => $btn1,
+        "btnid1" => $btn1_url
+    ];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urlencoded']);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($ch, CURLOPT_URL, $url);
+    //  curl_setopt($ch, CURLOPT_TIMEOUT_MS, 10000);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($result, true);
+}
+
 function sendMedia($number, $message, $sender, $filetype, $filename, $urll)
 {
     $url = base_node() . "/send-media";

@@ -19,18 +19,6 @@ module.exports = function (app, sessionMap, startDEVICE) {
     //     // chi.chika.sendMessage('6281331703371@s.whatsapp.net', { text: 'teasdasdasdadsdst' })
     //     // chi.chika.sendMessage('6281331703371@s.whatsapp.net', { image: { url: 'http://localhost/walix/app/storage/bff68d6422082a4b83e134a431bf5064.jpg' }, caption: '⭔ Media Url' })
     // })
-   app.get('/health', (req, res) => {
-  	const data = {
-    		uptime: process.uptime(),
-    		message: 'Ok',
-    		date: new Date()
-  	}
-
-	console.log(data)
-
-      	res.status(200).send(data);
-    });
-
 
     app.post('/send-message', async (req, res) => {
         const sender = req.body.sender;
@@ -140,6 +128,53 @@ module.exports = function (app, sessionMap, startDEVICE) {
                 text: `${message}`,
                 footer: `${footer}`,
                 buttons: buttons,
+                headerType: 1
+            }
+            conn.sendMessage(number, buttonMessage).then(response => {
+                res.status(200).json({
+                    status: true,
+                    response: response
+                });
+            }).catch(err => {
+                res.status(500).json({
+                    status: false,
+                    response: err
+                });
+            });
+        } else {
+            res.writeHead(401, {
+                'Content-Type': 'application/json'
+            });
+            res.end(JSON.stringify({
+                status: false,
+                message: 'Please scan the QR before use the API 2'
+            }));
+        }
+    });
+
+    app.post('/send-url', async (req, res) => {
+        const sender = req.body.sender;
+        
+        if (device(sender)) {
+            const conn = device(sender);
+            const message = req.body.message;
+            const btn1 = req.body.btn1;
+            const btnid1 = req.body.btnid1;
+            if (req.body.number.length > 15) {
+                var number = req.body.number;
+            } else {
+                var number = phoneNumberFormatter(req.body.number);
+            }
+
+            const buttons = [
+                { index: 1, urlButton: { displayText: btn1, url: btnid1  } },
+            ]
+
+            console.log(buttons)
+
+            const buttonMessage = {
+                text: `${message}`,
+                templateButtons: buttons,
                 headerType: 1
             }
             conn.sendMessage(number, buttonMessage).then(response => {
