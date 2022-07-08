@@ -50,7 +50,7 @@ const sessionMap = new Map()
 async function startDEVICE(idevice) {
     console.log(`idevice: ${idevice}`)
     const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
-    const { state, saveState } = useSingleFileAuthState(`device-${idevice}.json`)
+    const { state, saveState } = useSingleFileAuthState(`app_node/sessions/device-${idevice}.json`)
     const chika = chikaConnect({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: true,
